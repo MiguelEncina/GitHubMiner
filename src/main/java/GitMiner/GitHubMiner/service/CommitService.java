@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -16,14 +16,18 @@ public class CommitService {
 
     public List<Commit> findAllCommits(String projectAuthor, String projectName) {
 
-        List<Commit> commits = new ArrayList<>();
-        String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName;
+        String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName + "/commits";
 
-        Commit commit = restTemplate.getForObject(uri, Commit.class);
+        Commit[] commitArray = restTemplate.getForObject(uri, Commit[].class);
        
-        commits.add(commit);
+        return Arrays.stream(commitArray).toList();
 
-        return commits;
+    }
 
+    public Commit findCommit(String projectAuthor, String projectName, String id){
+
+        String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName + "/commits/" + id;
+        Commit commit = restTemplate.getForObject(uri, Commit.class);
+        return commit;
     }
 }
