@@ -1,6 +1,7 @@
 package GitMiner.GitHubMiner.service;
 
-import GitMiner.GitHubMiner.model.CommitSearch;
+import GitMiner.GitHubMiner.model.Commit;
+import GitMiner.GitHubMiner.model.IssueSearch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,25 +11,25 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class CommitService {
+public class IssueService {
     
     @Autowired
     RestTemplate restTemplate;
 
-    public List<CommitSearch> findAllCommits(String projectAuthor, String projectName) {
+    public List<IssueSearch> findAllIssues(String projectAuthor, String projectName) {
 
         String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName + "/commits";
 
-        CommitSearch[] commitArray = restTemplate.getForObject(uri, CommitSearch[].class);
+        IssueSearch[] commitArray = restTemplate.getForObject(uri, IssueSearch[].class);
        
         return Arrays.stream(commitArray).toList();
 
     }
 
-    public CommitSearch findCommit(String projectAuthor, String projectName, String id){
+    public Commit findIssueById(String projectAuthor, String projectName, String id){
 
         String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName + "/commits/" + id;
-        CommitSearch commit = restTemplate.getForObject(uri, CommitSearch.class);
+        Commit commit = restTemplate.getForObject(uri, Commit.class);
         return commit;
     }
 }
