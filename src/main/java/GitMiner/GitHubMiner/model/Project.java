@@ -1,8 +1,13 @@
 package GitMiner.GitHubMiner.model;
 import java.util.List;
+
+// import javax.persistence.Entity;
+// import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+// @Entity
+// @Table(name="projects")
 public class Project {
     
     @JsonProperty("id")

@@ -11,7 +11,13 @@ import GitMiner.GitHubMiner.repository.UserRepository;
 public class UserController {
     
     @Autowired
-    UserRepository repository;
+    UserRepository userRepository;
+
+    // @Autowired
+    // UserRepository repository;
+
+    // @Autowired
+    // UserRepository repository;
 
     // GET http://localhost:8080/ ...
 
