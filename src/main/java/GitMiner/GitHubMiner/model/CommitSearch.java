@@ -1,12 +1,6 @@
 
 package GitMiner.GitHubMiner.model;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,10 +24,6 @@ public class CommitSearch {
     private Author author;
     @JsonProperty("committer")
     private Committer committer;
-    @JsonProperty("parents")
-    private List<Parent> parents;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("sha")
     public String getSha() {
@@ -115,25 +105,7 @@ public class CommitSearch {
         this.committer = committer;
     }
 
-    @JsonProperty("parents")
-    public List<Parent> getParents() {
-        return parents;
-    }
-
-    @JsonProperty("parents")
-    public void setParents(List<Parent> parents) {
-        this.parents = parents;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+    
 
     @Override
     public String toString() {
@@ -170,14 +142,6 @@ public class CommitSearch {
         sb.append("committer");
         sb.append('=');
         sb.append(((this.committer == null)?"<null>":this.committer));
-        sb.append(',');
-        sb.append("parents");
-        sb.append('=');
-        sb.append(((this.parents == null)?"<null>":this.parents));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');

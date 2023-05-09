@@ -31,7 +31,7 @@ class GitHubMinerApplicationTests {
 
 	@Test
 	void findProject(){
-		Project project = service.findProject("spring-projects", "spring-framework");
+		Project project = service.findProject("spring-projects", "spring-framework", "2", "1");
 		System.out.println(project);
 	}
 

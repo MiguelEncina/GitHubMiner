@@ -1,16 +1,12 @@
 
 package GitMiner.GitHubMiner.model;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class ProjectSearch {
 
     @JsonProperty("id")
@@ -23,8 +19,6 @@ public class ProjectSearch {
     private String fullName;
     @JsonProperty("private")
     private Boolean _private;
-    @JsonProperty("owner")
-    private Owner owner;
     @JsonProperty("html_url")
     private String htmlUrl;
     @JsonProperty("description")
@@ -151,8 +145,6 @@ public class ProjectSearch {
     private Boolean disabled;
     @JsonProperty("open_issues_count")
     private Integer openIssuesCount;
-    @JsonProperty("license")
-    private License license;
     @JsonProperty("allow_forking")
     private Boolean allowForking;
     @JsonProperty("is_template")
@@ -173,14 +165,10 @@ public class ProjectSearch {
     private String defaultBranch;
     @JsonProperty("temp_clone_token")
     private Object tempCloneToken;
-    @JsonProperty("organization")
-    private Organization organization;
     @JsonProperty("network_count")
     private Integer networkCount;
     @JsonProperty("subscribers_count")
     private Integer subscribersCount;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("id")
     public Integer getId() {
@@ -230,16 +218,6 @@ public class ProjectSearch {
     @JsonProperty("private")
     public void setPrivate(Boolean _private) {
         this._private = _private;
-    }
-
-    @JsonProperty("owner")
-    public Owner getOwner() {
-        return owner;
-    }
-
-    @JsonProperty("owner")
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 
     @JsonProperty("html_url")
@@ -872,16 +850,6 @@ public class ProjectSearch {
         this.openIssuesCount = openIssuesCount;
     }
 
-    @JsonProperty("license")
-    public License getLicense() {
-        return license;
-    }
-
-    @JsonProperty("license")
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
     @JsonProperty("allow_forking")
     public Boolean getAllowForking() {
         return allowForking;
@@ -982,16 +950,6 @@ public class ProjectSearch {
         this.tempCloneToken = tempCloneToken;
     }
 
-    @JsonProperty("organization")
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    @JsonProperty("organization")
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
     @JsonProperty("network_count")
     public Integer getNetworkCount() {
         return networkCount;
@@ -1010,16 +968,6 @@ public class ProjectSearch {
     @JsonProperty("subscribers_count")
     public void setSubscribersCount(Integer subscribersCount) {
         this.subscribersCount = subscribersCount;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
     @Override
@@ -1045,10 +993,6 @@ public class ProjectSearch {
         sb.append("_private");
         sb.append('=');
         sb.append(((this._private == null)?"<null>":this._private));
-        sb.append(',');
-        sb.append("owner");
-        sb.append('=');
-        sb.append(((this.owner == null)?"<null>":this.owner));
         sb.append(',');
         sb.append("htmlUrl");
         sb.append('=');
@@ -1302,10 +1246,6 @@ public class ProjectSearch {
         sb.append('=');
         sb.append(((this.openIssuesCount == null)?"<null>":this.openIssuesCount));
         sb.append(',');
-        sb.append("license");
-        sb.append('=');
-        sb.append(((this.license == null)?"<null>":this.license));
-        sb.append(',');
         sb.append("allowForking");
         sb.append('=');
         sb.append(((this.allowForking == null)?"<null>":this.allowForking));
@@ -1346,10 +1286,6 @@ public class ProjectSearch {
         sb.append('=');
         sb.append(((this.tempCloneToken == null)?"<null>":this.tempCloneToken));
         sb.append(',');
-        sb.append("organization");
-        sb.append('=');
-        sb.append(((this.organization == null)?"<null>":this.organization));
-        sb.append(',');
         sb.append("networkCount");
         sb.append('=');
         sb.append(((this.networkCount == null)?"<null>":this.networkCount));
@@ -1357,10 +1293,6 @@ public class ProjectSearch {
         sb.append("subscribersCount");
         sb.append('=');
         sb.append(((this.subscribersCount == null)?"<null>":this.subscribersCount));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');

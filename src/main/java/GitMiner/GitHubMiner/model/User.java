@@ -1,15 +1,11 @@
 
 package GitMiner.GitHubMiner.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class User {
 
@@ -49,8 +45,6 @@ public class User {
     private String type;
     @JsonProperty("site_admin")
     private Boolean siteAdmin;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("login")
     public String getLogin() {
@@ -232,16 +226,6 @@ public class User {
         this.siteAdmin = siteAdmin;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -317,10 +301,6 @@ public class User {
         sb.append("siteAdmin");
         sb.append('=');
         sb.append(((this.siteAdmin == null)?"<null>":this.siteAdmin));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');

@@ -1,15 +1,11 @@
 
 package GitMiner.GitHubMiner.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Commit {
 
     @JsonProperty("author")
@@ -18,16 +14,8 @@ public class Commit {
     private Committer committer;
     @JsonProperty("message")
     private String message;
-    @JsonProperty("tree")
-    private Tree tree;
     @JsonProperty("url")
     private String url;
-    @JsonProperty("comment_count")
-    private Integer commentCount;
-    @JsonProperty("verification")
-    private Verification verification;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("author")
     public Author getAuthor() {
@@ -59,16 +47,6 @@ public class Commit {
         this.message = message;
     }
 
-    @JsonProperty("tree")
-    public Tree getTree() {
-        return tree;
-    }
-
-    @JsonProperty("tree")
-    public void setTree(Tree tree) {
-        this.tree = tree;
-    }
-
     @JsonProperty("url")
     public String getUrl() {
         return url;
@@ -77,36 +55,6 @@ public class Commit {
     @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    @JsonProperty("comment_count")
-    public Integer getCommentCount() {
-        return commentCount;
-    }
-
-    @JsonProperty("comment_count")
-    public void setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    @JsonProperty("verification")
-    public Verification getVerification() {
-        return verification;
-    }
-
-    @JsonProperty("verification")
-    public void setVerification(Verification verification) {
-        this.verification = verification;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
     @Override
@@ -125,25 +73,9 @@ public class Commit {
         sb.append('=');
         sb.append(((this.message == null)?"<null>":this.message));
         sb.append(',');
-        sb.append("tree");
-        sb.append('=');
-        sb.append(((this.tree == null)?"<null>":this.tree));
-        sb.append(',');
         sb.append("url");
         sb.append('=');
         sb.append(((this.url == null)?"<null>":this.url));
-        sb.append(',');
-        sb.append("commentCount");
-        sb.append('=');
-        sb.append(((this.commentCount == null)?"<null>":this.commentCount));
-        sb.append(',');
-        sb.append("verification");
-        sb.append('=');
-        sb.append(((this.verification == null)?"<null>":this.verification));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
