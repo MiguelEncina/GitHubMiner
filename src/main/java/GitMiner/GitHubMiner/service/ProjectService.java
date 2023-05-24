@@ -27,19 +27,21 @@ public class ProjectService {
 
     @Autowired
     RestTemplate restTemplate;
+    public String token = "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";
 
-    public Project findProject(String projectAuthor, String projectName, String sinceCommits, String sinceIssues) {
 
-        String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName;
-        String bearer = "Bearer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";
+    public Project findProject(String projectAuthor, String projectName, String sinceCommits, String sinceIssues, String maxPages) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", bearer);
+        headers.set("Authorization", "Bearer " + token);
+
+        String uri = "https://api.github.com/repos/" + projectAuthor + "/" + projectName;
+
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ProjectSearch project = restTemplate.exchange(uri, HttpMethod.GET, entity, ProjectSearch.class).getBody();
 
-        List<IssueSearch> issuesArray = Arrays.stream(restTemplate.exchange(uri + "/issues", HttpMethod.GET, entity, IssueSearch[].class).getBody()).toList();
+        List<IssueSearch> issuesArray = Arrays.stream(restTemplate.exchange(uri + "/issues?per_page=10", HttpMethod.GET, entity, IssueSearch[].class).getBody()).toList();
 
         List<Issue> issues = new ArrayList<>();
 
@@ -66,7 +68,7 @@ public class ProjectService {
             LocalDate last = LocalDate.of(Integer.parseInt(s2[0]), Integer.parseInt(s2[1]), Integer.parseInt(s2[2]));
             Integer difDias = LocalDate.now().getDayOfYear() - last.getDayOfYear();
             return (last.getYear()==LocalDate.now().getYear() && difDias <= Integer.parseInt(sinceIssues) && difDias >= 0);
-        }).toList();
+        }).limit(10*Integer.parseInt(maxPages)).toList();
 
 
         List<Commit_> commits_ = commits.stream()
@@ -76,14 +78,14 @@ public class ProjectService {
             LocalDate last = LocalDate.of(Integer.parseInt(s2[0]), Integer.parseInt(s2[1]), Integer.parseInt(s2[2]));
             Integer difDias = LocalDate.now().getDayOfYear() - last.getDayOfYear();
             return (last.getYear()==LocalDate.now().getYear() && difDias <= Integer.parseInt(sinceCommits) && difDias >= 0);
-        }).toList();
+        }).limit(10*Integer.parseInt(maxPages)).toList();
 
         return new Project(project.getId().toString(), project.getName(), project.getUrl(), commits_, issues_);
 
     }
     
-    public Project loadProject(String projectAuthor, String projectName, String sinceCommits, String sinceIssues) {
-        Project project = findProject(projectAuthor, projectName, sinceCommits, sinceIssues);
+    public Project loadProject(String projectAuthor, String projectName, String sinceCommits, String sinceIssues, String maxPages) {
+        Project project = findProject(projectAuthor, projectName, sinceCommits, sinceIssues, maxPages);
         HttpEntity<Project> request = new HttpEntity<Project>(project);
         ResponseEntity<Project> response = restTemplate.exchange("http://localhost:8080/gitminer/projects", HttpMethod.POST, request, Project.class);
         return response.getBody();

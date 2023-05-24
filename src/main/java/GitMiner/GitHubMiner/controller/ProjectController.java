@@ -20,23 +20,17 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-    // // GET http://localhost:8081/github
-    // @GetMapping
-    // public List<Project> findAll() {
-    //     return repository.findAll();
-    // }
-
     // GET http://localhost:8082/github/{projectAuthor}/{projectName}
     @GetMapping("/{projectAuthor}/{projectName}")
-    public Project findProject(@PathVariable String projectAuthor, @PathVariable String projectName, @RequestParam(defaultValue = "2") String sinceCommits, @RequestParam(defaultValue = "20") String sinceIssues) {
-        return service.findProject(projectAuthor, projectName, sinceCommits, sinceIssues);
+    public Project findProject(@PathVariable String projectAuthor, @PathVariable String projectName, @RequestParam(defaultValue = "2") String sinceCommits, @RequestParam(defaultValue = "20") String sinceIssues, @RequestParam(defaultValue = "2") String maxPages) {
+        return service.findProject(projectAuthor, projectName, sinceCommits, sinceIssues, maxPages);
     }
 
-    // POST http://localhost:8080/github/projects
+    // POST http://localhost:8082/github/projects
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{projectAuthor}/{projectName}")
-    public Project postProject(@PathVariable String projectAuthor, @PathVariable String projectName, @RequestParam(defaultValue = "2") String sinceCommits, @RequestParam(defaultValue = "20") String sinceIssues) {
-        return service.loadProject(projectAuthor, projectName, sinceCommits, sinceIssues);
+    public Project postProject(@PathVariable String projectAuthor, @PathVariable String projectName, @RequestParam(defaultValue = "2") String sinceCommits, @RequestParam(defaultValue = "20") String sinceIssues, @RequestParam(defaultValue = "2") String maxPages) {
+        return service.loadProject(projectAuthor, projectName, sinceCommits, sinceIssues, maxPages);
     }
 
 }
